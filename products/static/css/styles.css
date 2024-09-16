@@ -1,0 +1,13 @@
+/* static/css/styles.css */
+
+@font-face {
+    font-family: 'BNazanin';
+    src: url('../fonts/BNazanin.ttf') format('truetype');
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'BNazanin', sans-serif;
+}

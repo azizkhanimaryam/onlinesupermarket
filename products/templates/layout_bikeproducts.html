@@ -1,0 +1,256 @@
+<!DOCTYPE html> <!-- This ensures Standards Mode -->
+{% load static %} <!-- Load the static files handling tag -->
+<html lang="fa"> <!-- Setting the language to Persian (RTL support) -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Proper character encoding for Persian text -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- For responsive design -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Compatibility for IE -->
+
+    <title>{% block title %} {% endblock %}</title>
+
+
+    <!-- Your existing styles and fonts -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/templatemo.css' %}" rel="stylesheet">
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}"> <!-- FontAwesome -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Your custom styles with the BNazanin font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap"> <!-- Google Fonts -->
+
+</head>
+
+
+<body>
+    {% include "navbar.html" %}
+    {% block body_page %} {% endblock %}
+
+    <!-- Start Footer -->
+    <!--upper footer -->
+    <footer class="navbar navbar-expand-lg navbar-light shadow" style="background-color: green;" dir="rtl">
+     <div class="container d-flex justify-content-between align-items-center">
+        <!-- Right side: Brand Name and time -->
+        <a class="navbar-brand text-light logo h2 align-self-center" href="index.html">
+            ارتباط با پشتیبانی سوپرمارکت آنلاین شهر همه روزه از ساعت ۸:۳۰ الی ۱۹
+        </a>
+
+<!-- left side: phone number -->
+        <div class="d-flex align-items-center">
+        <a class="navbar-brand text-light logo h2 align-self-center mr-1" href="index.html">
+             <h6>شماره پشتیبانی</h6>
+        </a>
+            <a class="nav-icon position-relative text-light text-decoration-none mr-1" href="#">
+               <h3>0218776543</h3>
+            </a>
+        </div>
+    </div>
+</footer>
+
+
+<!--lower footer -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .footer {
+            background-color: #f8f8f8;
+            color: #333;
+            padding: 30px 20px;
+            font-size: 14px;
+            direction: rtl;
+        }
+
+        .footer .footer-columns {
+            display: flex;
+            justify-content: space-around;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .footer .footer-columns div {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .footer .footer-columns h4 {
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .footer .footer-columns ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer .footer-columns ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer .footer-columns ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .footer .social-media {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .footer .social-media a {
+            margin: 0 10px;
+        }
+
+        .footer .social-media img {
+            width: 24px;
+            vertical-align: middle;
+        }
+
+        .footer .bottom-links {
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .footer .bottom-links a {
+            margin: 0 10px;
+            color: #555;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="footer">
+<div class="footer-columns">
+    {% for category in categories %}
+    <div>
+        <h3>
+            <a class="nav-link h3" href="{% url 'products:product_list_by_category' category.id %}">{{ category.name }}</a>
+        </h3>
+        <ul>
+            {% for product in category.product_set.all %}
+            <li>
+                <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+            </li>
+            {% empty %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+
+        <style>
+.container {
+    width: 100%;
+    padding: 0 20px; /* Optional: add horizontal padding to the container */
+}
+
+.bottom-links {
+    display: flex;
+    justify-content: space-between; /* Adjust spacing between items */
+    align-items: center; /* Align items vertically */
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines if necessary */
+    width: 100%; /* Ensure it takes up the full width of its container */
+}
+
+.bottom-links a {
+    flex: 1; /* Make each link take up an equal amount of space */
+    text-align: center; /* Center the text inside each link */
+    margin: 0 10px; /* Optional: Add horizontal margin between items */
+}
+
+.bottom-links h3 {
+    margin: 0; /* Remove default margin from h3 */
+}
+
+.social-media {
+    display: flex;
+    justify-content: center; /* Center the icons horizontally */
+    margin-top: 20px; /* Adjust this value to increase the distance */
+}
+
+.social-media a {
+    margin: 0 10px; /* Optional: Add horizontal margin between icons */
+}
+
+.social-media img {
+    width: 60px; /* Adjust size of icons if needed */
+    height: auto; /* Maintain aspect ratio */
+}
+</style>
+
+<div class="container">
+    <div class="bottom-links">
+        <a href="{% url 'products:about' %}"><h3>درباره ما</h3></a>
+        <a href="{% url 'products:rules' %}"><h3>قوانین و مقررات</h3></a>
+        <a href="{% url 'products:faq' %}"><h3>سوالات متداول</h3></a>
+        <a href="{% url 'products:contact' %}"><h3>تماس با ما</h3></a>
+        <a href="{% url 'comments:comment_page' %}"><h3>ثبت نظر</h3></a>
+    </div>
+</div>
+
+
+<!-- Social Media and Footer Bottom Section -->
+
+<div class="footer-bottom-section">
+    <div class="container">
+        <div class="footer-bottom-content">
+        <div class="separateFooter"></div>
+            <div class="col-md-12">
+<div class="social-media">
+            <div class="responsiveSocialText">مارا در سایر شبکه ها دنبال کنید</div>
+            <a href="https://telegram.org">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+            </a>
+            <a href="https://instagram.com">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            </a>
+            <a href="https://rss.com">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Feed-icon.svg" alt="RSS">
+            </a>
+        </div>
+
+    </div>
+</div>            <div class="col-md-12">
+              <div class="footerNemad">
+                            <div class="copyRightText">
+                        کلیه حقوق سایت برای سوپر مارکت شهر محفوظ است . استفاده غیرتجاری مطلب همراه با ذکر منبع و لینک مجاز می‌باشد.<br>
+
+                        «‫‫ طراحی وب سایت: <a href="http://www.rahkarandishan.com" target="_blank">Maryam Azizkhani</a> »
+                    </div>
+
+                </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+    </div>
+</body>
+
+
+
+    <!-- End Footer -->
+    {% block script %}
+    <!-- Start Script -->
+    <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/templatemo.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    {% endblock %}
+    <!-- End Script -->
+</body>
+</html>
+
