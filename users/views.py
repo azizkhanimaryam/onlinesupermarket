@@ -91,7 +91,7 @@ def registerAction(request):
 
 def LogOut(request):
     logout(request)
-    return redirect('products:home')
+    return redirect('home')
 
 def Checklogin(request):
     if request.method == 'POST':

@@ -10,13 +10,16 @@ def comment_page(request):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.user = request.user  # Assuming the user is logged in
-            comment.save()
-            messages.success(request, "پیام شما با موفقیت ارسال شد، با تشکر!")  # Add success message
-            return redirect('comments:comment_page')  # Correct URL name used here
+            # Check if the user is authenticated and exists
+            if request.user and request.user.is_authenticated:
+                comment.user = request.user  # Set the current user
+                comment.save()
+                messages.success(request, "پیام شما با موفقیت ارسال شد، با تشکر!")  # Success message
+            else:
+                messages.error(request, "کاربر معتبر نیست. لطفاً دوباره وارد شوید.")  # Error if the user is invalid
+            return redirect('comments:comment_page')
     else:
         form = CommentForm()
 
     comments = Comment.objects.all().order_by('-created_at')
     return render(request, 'comment_page.html', {'form': form, 'comments': comments})
-
