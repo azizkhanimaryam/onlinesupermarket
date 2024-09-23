@@ -10,7 +10,7 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from .models import Product
 from django.utils import timezone
-from products.models import Category, Product, MostSoldProduct  # Use absolute imports
+from products.models import Category, Product
 from django.urls import reverse
 from django.db import IntegrityError
 import logging
@@ -126,14 +126,3 @@ class ProductListView(ListView):
     context_object_name = 'products'
 
 
-
-
-
-
-
-
-def most_sold_products(request):
-    current_month = timezone.now().date().replace(day=1)  # First day of the current month
-    most_sold_products = MostSoldProduct.objects.filter(month__year=current_month.year, month__month=current_month.month)
-    print(most_sold_products)
-    return render(request, 'index.html', {'most_sold_products': most_sold_products})

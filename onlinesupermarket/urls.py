@@ -30,6 +30,6 @@ urlpatterns = [
     path('comments/', include('comments.urls')),
     path('users/', include('users.urls',namespace='users')),
     path('', home, name='home'),  # Add this line to define the 'home' URL pattern
-
+    path('__debug__/', include('debug_toolbar.urls')),  # Include this line
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

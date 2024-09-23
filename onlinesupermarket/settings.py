@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'users',
     'api',
     'rest_framework',
-
+    #'products.apps.ProductsConfig',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
 
 ROOT_URLCONF = 'onlinesupermarket.urls'
 
@@ -144,3 +151,20 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'home'  # The URL name or path you want to redirect after login
 LOGIN_URL = 'users:login'  # The login view URL
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        },
+    },
+}

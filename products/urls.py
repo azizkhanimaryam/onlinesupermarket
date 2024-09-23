@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import ProductDetailView, ProductListView, most_sold_products,product_detail
+from .views import ProductDetailView, ProductListView, product_detail
 
 
 #app_name = 'products'
@@ -18,8 +18,6 @@ urlpatterns = [
     path('search/', views.product_search, name='product_search'),
     path('product/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
     path('products/', ProductListView.as_view(), name='product_list'),
-    #path('most-sold-products/', most_sold_products, name='home'),
-    path('', most_sold_products, name='most_sold_products'),
     path('product/<int:pk>/', product_detail, name='product_detail'),
     path('product/<int:product_id>/', views.product_detail, name='product_detail'),
 

@@ -5,6 +5,13 @@ class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('The Email field must be set')
+
+        # Set default values for required fields if they are not provided
+        extra_fields.setdefault('first_name', 'First Name')
+        extra_fields.setdefault('last_name', 'Last Name')
+        extra_fields.setdefault('full_name', f"{extra_fields.get('first_name')} {extra_fields.get('last_name')}")
+        extra_fields.setdefault('phone', '0000000000')  # Default phone number
+
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
