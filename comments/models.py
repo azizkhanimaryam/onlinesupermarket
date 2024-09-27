@@ -6,6 +6,7 @@ from users.models import CustomUser
 
 def get_default_user():
     User = get_user_model()  # This gets the user model defined in settings.AUTH_USER_MODEL
+
     try:
         return User.objects.get(pk=1).id
     except User.DoesNotExist:

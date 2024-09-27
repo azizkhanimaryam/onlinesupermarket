@@ -24,7 +24,7 @@ class Order(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    # Removed sensitive card information
+
     # Use a payment processor (like Zarinpal) to handle card details securely
 
     def __str__(self):
